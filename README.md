@@ -1,3 +1,24 @@
+Adaptation of NICE for inpainting missing data datasets
+=======================================================
+
+This repository extends the original NICE code to support inpainting datasets with general missing data
+supplied in the form of mask images.
+
+
+
+Training a model follows the instructions in the original paper- after installing all dependencies, call [`pylearn2/scripts/train.py`](https://github.com/lisa-lab/pylearn2/blob/master/pylearn2/scripts/train.py) on  
+`exp/nice_mnist.yaml`
+
+The missing data dataset should have one `index.txt` file listing each corrupted image file with its label in Caffe ImageData format, and one `index_mask.txt` file in the same format listing the mask file corresponding to each
+corrupted image file.
+
+To inpaint such a dataset, run (for MNIST):
+`` python pylearn2/scripts/mnist_inpainting.py exp/nice_mnist_best.pkl <missing_data_dir> ``
+
+Where the `.pkl` file is the model generated through training.
+
+The new dataset will be created at the same location as the missing dataset, under the same name with the addition of `_nice_ip`.
+
 NICE: Non-linear independent components estimation
 ==================================================
 
